@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 export function InstagramLink({ href }: { href: string }) {
   return <a href={href} className="instagram-link" aria-label="J Road on Instagram"
@@ -22,9 +23,12 @@ export function SiteHeader({ instagram, current }: { instagram?: string; current
   </nav></header>;
 }
 
-export function SiteFooter() {
+export function SiteFooter({ children }: { children?: ReactNode }) {
   return <footer className="wrap">
-    <Link href="/"><img className="footer-logo" src="/assets/jroad-whale.jpg" width="112" height="78" alt="JROAD home" /></Link>
-    <Link href="/portal">Editor portal</Link>
+    {children}
+    <div className="footer-links">
+      <Link href="/"><img className="footer-logo" src="/assets/jroad-whale.jpg" width="112" height="78" alt="JROAD home" /></Link>
+      <Link href="/portal">Editor portal</Link>
+    </div>
   </footer>;
 }

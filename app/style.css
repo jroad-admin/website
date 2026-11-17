@@ -11,7 +11,7 @@ button{cursor:pointer}
 .wrap{width:min(88%,1580px);margin-inline:auto}
 .masthead{min-height:76px;display:grid;place-items:center;border-bottom:1px solid #17171512}
 nav,.filters{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1rem,3vw,3.4rem)}
-nav a,.filters button,.eyebrow,footer,.hero-contact{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+nav a,.filters button,.eyebrow,.footer-links,.hero-contact{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
 nav a{text-decoration:none}
 nav a:hover,footer a:hover{text-decoration:underline}
 nav a[aria-current=page]{text-decoration:underline}
@@ -19,13 +19,19 @@ nav a[aria-current=page]{text-decoration:underline}
 .instagram-link svg{display:block}
 .instagram-link:hover{opacity:.65}
 .screen-reader-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.hero{min-height:calc(90svh - 76px);display:flex;align-items:flex-end;padding-bottom:clamp(3rem,11vh,8rem)}
+.hero{min-height:calc(100svh - 76px);display:flex;align-items:flex-end;padding-block:2rem clamp(3rem,14svh,8rem)}
 h1{font:clamp(3.7rem,8vw,8rem)/.92 'Archivo Black',Arial Black,sans-serif;letter-spacing:-.085em;margin:0}
-.tagline{font-size:clamp(.75rem,1.55vw,1.4rem);letter-spacing:.29em;text-transform:uppercase;font-weight:700;margin:1.45rem 0 3rem}
-.hero-contact{display:grid;gap:.45rem}
+.hero-wordmark img{display:block;width:clamp(11rem,17vw,19.25rem);max-width:100%;height:auto}
+.tagline{font-size:clamp(.78rem,1.24vw,1.43rem);letter-spacing:.28em;text-transform:uppercase;font-weight:700;margin:1.35rem 0 clamp(2.25rem,4vw,4.1rem)}
+.hero-contact{display:grid;gap:.55rem;font-size:clamp(.75rem,1vw,1.02rem);letter-spacing:.23em;font-weight:700}
 .hero-contact a{text-decoration:none;width:fit-content}
-.down{display:inline-grid;width:2rem;height:2.75rem;font-size:2rem;text-decoration:none;place-items:center}
+.down{position:relative;display:block;width:2.75rem;height:2.75rem;margin-left:-.3rem;margin-top:.35rem}
+.down::before,.down::after{content:"";position:absolute;left:.55rem;width:1.02rem;height:1.02rem;border-right:1.5px solid;border-bottom:1.5px solid;transform:rotate(45deg)}
+.down::before{top:.15rem}.down::after{top:.82rem}
 .work{padding-block:2rem 5rem}
+.home-work{padding-top:1.5rem}
+.home-work .filters{margin-bottom:1.7rem}
+.home-work .tile small{font-size:.75rem;color:#565752}
 .filters{gap:.55rem clamp(.65rem,2.8vw,3rem)}
 .filters button{background:none;border:0;border-bottom:1px solid transparent;padding:.6rem .15rem}
 .filters button[aria-pressed=true]{border-color:currentColor}
@@ -35,12 +41,10 @@ h1{font:clamp(3.7rem,8vw,8rem)/.92 'Archivo Black',Arial Black,sans-serif;letter
 .tile img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:.45rem;background:#dfded7}
 .tile span{font-weight:600}
 .tile:hover span{text-decoration:underline}
-.about{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:clamp(2rem,8vw,10rem);padding:3rem 0 6rem;border-top:1px solid #17171520}
-.about img{width:100%;display:block;aspect-ratio:5/4;object-fit:cover}
 h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-.05em;margin:.6rem 0 1.5rem}
-.about p,.contact p{line-height:1.6;white-space:pre-line}
-.contact{padding:clamp(2rem,8vw,7rem);margin-bottom:2rem}
-.contact-details{display:flex;flex-wrap:wrap;gap:0 5rem}
+.home-studio{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:1.5rem clamp(1.5rem,8vw,7rem);padding:1.65rem 0;border-top:1px solid #17171525;font-size:.92rem;line-height:1.55}
+.home-studio p{margin:0 0 .5rem;white-space:pre-line}
+.home-studio a{display:block;width:fit-content;overflow-wrap:anywhere}
 .interior{min-height:65svh;padding-block:clamp(3rem,8vw,7rem) 4rem}
 .interior h1{margin:0 0 2rem;font:600 clamp(2.5rem,7vw,6rem)/1 'Instrument Sans',Arial,sans-serif;letter-spacing:-.06em;overflow-wrap:anywhere}
 .studio-copy{max-width:65ch;line-height:1.65;white-space:pre-line}
@@ -71,8 +75,8 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 @media(max-width:900px){.team-grid{row-gap:3rem}.team-profile{flex-basis:calc((100% - var(--team-gap))/2)}}
 @media(max-width:780px){.contact-panel{grid-template-columns:1fr}.contact-image{aspect-ratio:3/2}.contact-panel-inner{max-width:none;padding-top:0}}
 @media(max-width:480px){.enquiry-form{grid-template-columns:1fr}.contact-panel-details{gap:.65rem 1rem}}
-footer{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 2rem}
-footer a{text-decoration:none}
+.footer-links{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 2rem}
+.footer-links a{text-decoration:none}
 .footer-logo{display:block;width:112px;height:auto;mix-blend-mode:multiply}
 .portal{width:min(92%,920px);margin:2rem auto 5rem}
 .portal section{padding:1rem 0 2rem;border-top:1px solid #17171530}
@@ -138,7 +142,7 @@ footer a{text-decoration:none}
 .editor-cover figcaption{margin-top:.4rem}
 .editor-bio{white-space:pre-line;line-height:1.6;overflow-wrap:anywhere}
 @media(max-width:600px){.editor-header,.editor-section-heading,.editor-member{align-items:flex-start;flex-direction:column}.editor-header{gap:.25rem}.editor-tabs button{padding-inline:.65rem}}
-@media(max-width:680px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}.about{grid-template-columns:1fr}.hero{min-height:70svh}.contact{padding:2rem}.masthead{min-height:60px}}
+@media(max-width:680px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{min-height:calc(86svh - 60px);padding-bottom:clamp(2.5rem,9svh,5rem)}.masthead{min-height:60px}}
 @media(max-width:520px){
   .team-profile{flex-basis:100%}
   .masthead{padding:0 .7rem}
@@ -146,8 +150,9 @@ footer a{text-decoration:none}
   .masthead nav a{display:inline-grid;place-items:center;min-height:44px}
   .masthead nav a:not(.instagram-link){letter-spacing:.07em;font-size:.73rem}
   .projects{grid-template-columns:1fr}
+  .home-studio{grid-template-columns:1fr}
   .editor-dialog{width:calc(100% - 1rem)}
   .editor-form-actions{justify-content:flex-start}
 }
-@media(max-width:360px){.project-toolbar{grid-template-columns:1fr}.hero h1{font-size:3.3rem}}
+@media(max-width:360px){.project-toolbar{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}}
