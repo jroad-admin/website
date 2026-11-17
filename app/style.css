@@ -47,11 +47,12 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 .project-category{margin:2.5rem 0 .65rem}
 .project-cover{display:block;width:100%;max-height:75vh;object-fit:contain;object-position:left center}
 .team-page{min-height:65svh;padding-block:clamp(4rem,10vw,8rem) 5rem}
-.team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.4rem,4vw,4rem)}
+.team-grid{--team-gap:clamp(1.4rem,4vw,4rem);display:flex;flex-wrap:wrap;justify-content:center;gap:var(--team-gap)}
+.team-profile{flex:0 1 calc((100% - 3 * var(--team-gap))/4);min-width:0;max-width:330px;text-align:center;overflow-wrap:anywhere}
 .team-profile h2,.team-role{font-family:Georgia,serif;text-transform:uppercase;letter-spacing:.06em}
 .team-profile h2{font-size:1.2rem;font-weight:400;margin:0 0 .9rem}
 .team-role{font-size:.78rem;line-height:1.4;margin:0 0 1.3rem}
-.team-portrait{display:block;width:min(100%,194px);height:auto;margin-block:1.5rem;mix-blend-mode:multiply}
+.team-portrait{display:block;width:min(100%,194px);height:auto;margin:1.5rem auto;mix-blend-mode:multiply}
 .team-bio{white-space:pre-line;line-height:1.6}
 .contact-page{padding:1.4rem 0 2rem}
 .contact-page h1{font:600 1.3rem/1.4 'Instrument Sans',Arial,sans-serif;letter-spacing:.08em;text-align:center;text-transform:uppercase;margin:0 0 clamp(3rem,8vw,8rem)}
@@ -59,7 +60,7 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 .contact-image{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:47% center}
 .contact-panel-inner{width:100%;max-width:640px;padding-top:clamp(.5rem,4vw,4rem)}
 .contact-panel-details{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem 2.5rem;line-height:1.75}
-.contact-panel-details p{margin:0;white-space:pre-line}
+.contact-panel-details p{min-width:0;margin:0;white-space:pre-line;overflow-wrap:anywhere}
 .enquiry-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1.25rem;margin-top:3.5rem}
 .enquiry-form h2,.enquiry-wide{grid-column:1/-1}
 .enquiry-form h2{text-align:center;font-size:1.25rem;letter-spacing:.02em;margin:.25rem 0 1rem}
@@ -67,7 +68,7 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 .enquiry-form textarea{resize:vertical}
 .enquiry-form button{background:#252832;color:#fff;border:1px solid #252832;padding:.7rem 1rem}
 .profile-fields{display:grid;gap:.85rem;border:1px solid #747770;padding:1rem}
-@media(max-width:800px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:3rem}}
+@media(max-width:900px){.team-grid{row-gap:3rem}.team-profile{flex-basis:calc((100% - var(--team-gap))/2)}}
 @media(max-width:780px){.contact-panel{grid-template-columns:1fr}.contact-image{aspect-ratio:3/2}.contact-panel-inner{max-width:none;padding-top:0}}
 @media(max-width:480px){.enquiry-form{grid-template-columns:1fr}.contact-panel-details{gap:.65rem 1rem}}
 footer{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 2rem}
@@ -138,4 +139,15 @@ footer a{text-decoration:none}
 .editor-bio{white-space:pre-line;line-height:1.6;overflow-wrap:anywhere}
 @media(max-width:600px){.editor-header,.editor-section-heading,.editor-member{align-items:flex-start;flex-direction:column}.editor-header{gap:.25rem}.editor-tabs button{padding-inline:.65rem}}
 @media(max-width:680px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}.about{grid-template-columns:1fr}.hero{min-height:70svh}.contact{padding:2rem}.masthead{min-height:60px}}
+@media(max-width:520px){
+  .team-profile{flex-basis:100%}
+  .masthead{padding:0 .7rem}
+  .masthead nav{gap:.2rem clamp(.45rem,3vw,1rem)}
+  .masthead nav a{display:inline-grid;place-items:center;min-height:44px}
+  .masthead nav a:not(.instagram-link){letter-spacing:.07em;font-size:.73rem}
+  .projects{grid-template-columns:1fr}
+  .editor-dialog{width:calc(100% - 1rem)}
+  .editor-form-actions{justify-content:flex-start}
+}
+@media(max-width:360px){.project-toolbar{grid-template-columns:1fr}.hero h1{font-size:3.3rem}}
 @media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}}
