@@ -57,23 +57,18 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 .team-role{font-size:.78rem;line-height:1.4;margin:0 0 1.3rem}
 .team-portrait{display:block;width:min(100%,194px);height:auto;margin:1.5rem auto;mix-blend-mode:multiply}
 .team-bio{white-space:pre-line;line-height:1.6}
-.contact-page{padding:1.4rem 0 2rem}
-.contact-page h1{font:600 1.3rem/1.4 'Instrument Sans',Arial,sans-serif;letter-spacing:.08em;text-align:center;text-transform:uppercase;margin:0 0 clamp(3rem,8vw,8rem)}
-.contact-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:start;gap:clamp(2rem,7vw,7rem);padding-bottom:3rem}
-.contact-image{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:47% center}
-.contact-panel-inner{width:100%;max-width:640px;padding-top:clamp(.5rem,4vw,4rem)}
-.contact-panel-details{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem 2.5rem;line-height:1.75}
-.contact-panel-details p{min-width:0;margin:0;white-space:pre-line;overflow-wrap:anywhere}
-.enquiry-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1.25rem;margin-top:3.5rem}
-.enquiry-form h2,.enquiry-wide{grid-column:1/-1}
-.enquiry-form h2{text-align:center;font-size:1.25rem;letter-spacing:.02em;margin:.25rem 0 1rem}
-.enquiry-form input,.enquiry-form textarea{display:block;width:100%;margin-top:.5rem;padding:.62rem;border:1px solid #444957;background:transparent;border-radius:0}
-.enquiry-form textarea{resize:vertical}
-.enquiry-form button{background:#252832;color:#fff;border:1px solid #252832;padding:.7rem 1rem}
+.contact-page{padding-bottom:2rem}
+.contact-panel{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);min-height:calc(100svh - 76px)}
+.contact-image{display:block;width:100%;height:100%;object-fit:cover;object-position:47% center}
+.contact-panel-details{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-self:center;gap:1.4rem 2rem;margin:0 clamp(1.5rem,5vw,6rem) 0 clamp(2rem,18vw,22rem);padding-block:clamp(5rem,15svh,10rem) 2rem;font-size:.95rem;line-height:1.5}
+.contact-panel-details h2{font:600 1rem/1.25 'Instrument Sans',Arial,sans-serif;letter-spacing:.045em;text-transform:uppercase;margin:0 0 1.9rem}
+.contact-panel-details p{margin:0;white-space:pre-line;overflow-wrap:anywhere}
+.contact-panel-details a{display:block;width:fit-content;max-width:100%;overflow-wrap:anywhere}
 .profile-fields{display:grid;gap:.85rem;border:1px solid #747770;padding:1rem}
 @media(max-width:900px){.team-grid{row-gap:3rem}.team-profile{flex-basis:calc((100% - var(--team-gap))/2)}}
-@media(max-width:780px){.contact-panel{grid-template-columns:1fr}.contact-image{aspect-ratio:3/2}.contact-panel-inner{max-width:none;padding-top:0}}
-@media(max-width:480px){.enquiry-form{grid-template-columns:1fr}.contact-panel-details{gap:.65rem 1rem}}
+@media(max-width:1100px){.contact-panel-details{margin-left:clamp(2rem,8vw,6rem)}}
+@media(max-width:780px){.contact-panel{grid-template-columns:1fr;min-height:0}.contact-image{height:auto;aspect-ratio:3/2}.contact-panel-details{margin-inline:6%;padding-block:2rem 0}.contact-panel-details h2{margin-bottom:.85rem}}
+@media(max-width:420px){.contact-panel-details{grid-template-columns:1fr;gap:1.5rem}}
 .footer-links{display:flex;align-items:center;justify-content:flex-end;padding:1.5rem 0 2rem}
 .footer-links a{text-decoration:none}
 .footer-logo{display:block;width:52px;height:auto;mix-blend-mode:multiply}
