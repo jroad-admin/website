@@ -21,6 +21,6 @@ export default async function About() {
         </article>)}
       </div>
     </main>
-    <SiteFooter />
+    <SiteFooter site={site} />
   </>;
 }

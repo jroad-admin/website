@@ -28,6 +28,6 @@ export default async function Contact() {
         </div>
       </div>
     </main>
-    <SiteFooter />
+    <SiteFooter site={site} />
   </>;
 }

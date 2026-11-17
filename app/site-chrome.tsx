@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { Settings } from "../lib/content";
 
 export function InstagramLink({ href }: { href: string }) {
   return <a href={href} className="instagram-link" aria-label="J Road on Instagram"
@@ -23,18 +23,22 @@ export function SiteHeader({ instagram, current }: { instagram?: string; current
   </nav></header>;
 }
 
-export function SiteWhale({ compact = false }: { compact?: boolean }) {
-  return <Link href="/" className={compact ? "footer-whale-compact" : undefined}>
-    <img className="footer-logo" src="/assets/jroad-whale.jpg" width={compact ? 52 : 112} height={compact ? 36 : 78} alt="JROAD home" />
-  </Link>;
-}
-
-export function SiteFooter({ children, showLogo = true }: { children?: ReactNode; showLogo?: boolean }) {
+export function SiteFooter({ site }: { site: Settings }) {
   return <footer className="wrap">
-    {children}
-    <div className="footer-links">
-      {showLogo && <SiteWhale />}
-      <Link href="/portal">Editor portal</Link>
+    <div className="footer-details">
+      <div id="about">
+        <Link href="/" className="footer-whale-compact">
+          <img className="footer-logo" src="/assets/jroad-whale.jpg" width={52} height={36} alt="JROAD home" />
+        </Link>
+        <p>{site.about}</p>
+      </div>
+      <div id="contact">
+        <p className="eyebrow">Enquiries</p>
+        {site.address && <p>{site.address}</p>}
+        {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
+        {site.phone && <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}>{site.phone}</a>}
+      </div>
     </div>
+    <div className="footer-links"><Link href="/portal">Editor portal</Link></div>
   </footer>;
 }

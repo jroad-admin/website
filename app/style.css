@@ -41,9 +41,9 @@ h1{font:clamp(3.7rem,8vw,8rem)/.92 'Archivo Black',Arial Black,sans-serif;letter
 .tile span{font-weight:600}
 .tile:hover span{text-decoration:underline}
 h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-.05em;margin:.6rem 0 1.5rem}
-.home-studio{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:1.5rem clamp(1.5rem,8vw,7rem);padding:1.65rem 0;border-top:1px solid #17171525;font-size:.92rem;line-height:1.55}
-.home-studio p{margin:0 0 .5rem;white-space:pre-line}
-.home-studio a{display:block;width:fit-content;overflow-wrap:anywhere}
+.footer-details{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:1.5rem clamp(1.5rem,8vw,7rem);padding:1.65rem 0;border-top:1px solid #17171525;font-size:.92rem;line-height:1.55}
+.footer-details p{margin:0 0 .5rem;white-space:pre-line}
+.footer-details a{display:block;width:fit-content;overflow-wrap:anywhere}
 .interior{min-height:65svh;padding-block:clamp(3rem,8vw,7rem) 4rem}
 .interior h1{margin:0 0 2rem;font:600 clamp(2.5rem,7vw,6rem)/1 'Instrument Sans',Arial,sans-serif;letter-spacing:-.06em;overflow-wrap:anywhere}
 .studio-copy{max-width:65ch;line-height:1.65;white-space:pre-line}
@@ -74,12 +74,10 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 @media(max-width:900px){.team-grid{row-gap:3rem}.team-profile{flex-basis:calc((100% - var(--team-gap))/2)}}
 @media(max-width:780px){.contact-panel{grid-template-columns:1fr}.contact-image{aspect-ratio:3/2}.contact-panel-inner{max-width:none;padding-top:0}}
 @media(max-width:480px){.enquiry-form{grid-template-columns:1fr}.contact-panel-details{gap:.65rem 1rem}}
-.footer-links{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 2rem}
+.footer-links{display:flex;align-items:center;justify-content:flex-end;padding:1.5rem 0 2rem}
 .footer-links a{text-decoration:none}
-.footer-links>:only-child{margin-left:auto}
-.footer-logo{display:block;width:112px;height:auto;mix-blend-mode:multiply}
+.footer-logo{display:block;width:52px;height:auto;mix-blend-mode:multiply}
 .footer-whale-compact{margin-bottom:.45rem}
-.footer-whale-compact .footer-logo{width:52px}
 .portal{width:min(92%,920px);margin:2rem auto 5rem}
 .portal section{padding:1rem 0 2rem;border-top:1px solid #17171530}
 .portal form{display:grid;gap:.85rem;max-width:620px}
@@ -152,7 +150,7 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
   .masthead nav a{display:inline-grid;place-items:center;min-height:44px}
   .masthead nav a:not(.instagram-link){letter-spacing:.07em;font-size:.73rem}
   .projects{grid-template-columns:1fr}
-  .home-studio{grid-template-columns:1fr}
+  .footer-details{grid-template-columns:1fr}
   .editor-dialog{width:calc(100% - 1rem)}
   .editor-form-actions{justify-content:flex-start}
 }

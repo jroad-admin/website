@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { readProject } from "../../../lib/content";
+import { initialSettings, readProject, readSite } from "../../../lib/content";
 import { coverSource, isPlaceholderCover } from "../../../lib/project-cover";
 import { SiteFooter, SiteHeader } from "../../site-chrome";
 
@@ -19,11 +19,12 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function ProjectPage({ params }: Props) {
   const { id } = await params;
-  const result = await projectForRequest(id);
+  const [result, { settings }] = await Promise.all([projectForRequest(id), readSite()]);
   if (!result) notFound();
-  const { project, instagram } = result;
+  const { project } = result;
+  const site = settings ?? initialSettings;
   return <>
-    <SiteHeader instagram={instagram} current="/work" />
+    <SiteHeader instagram={site.instagram} current="/work" />
     <main className="wrap interior">
       <Link href="/work">← All work</Link>
       <p className="eyebrow project-category">{project.category}</p>
@@ -32,6 +33,6 @@ export default async function ProjectPage({ params }: Props) {
       {project.imageKey && <img className="project-cover" src={coverSource(project.imageKey)} alt={project.title} />}
       <p className="studio-copy">{project.description}</p>
     </main>
-    <SiteFooter />
+    <SiteFooter site={site} />
   </>;
 }

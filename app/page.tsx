@@ -1,6 +1,6 @@
 import { categories, initialSettings, readSite } from "../lib/content";
 import Gallery from "./gallery";
-import { SiteFooter, SiteHeader, SiteWhale } from "./site-chrome";
+import { SiteFooter, SiteHeader } from "./site-chrome";
 
 export const dynamic = "force-dynamic";
 
@@ -22,15 +22,6 @@ export default async function Home() {
       </section>
       <section id="work" className="work wrap home-work" aria-label="Work"><Gallery projects={projects} categories={categories} /></section>
     </main>
-    <SiteFooter showLogo={false}>
-      <div className="home-studio">
-        <div id="about"><SiteWhale compact /><p>{site.about}</p></div>
-        <div id="contact"><p className="eyebrow">Enquiries</p>
-          {site.address && <p>{site.address}</p>}
-          {site.email && <a href={email}>{site.email}</a>}
-          {site.phone && <a href={phone}>{site.phone}</a>}
-        </div>
-      </div>
-    </SiteFooter>
+    <SiteFooter site={site} />
   </>;
 }

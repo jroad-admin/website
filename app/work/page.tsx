@@ -8,12 +8,13 @@ export const dynamic = "force-dynamic";
 
 export default async function Work() {
   const { projects, settings } = await readSite();
+  const site = settings ?? initialSettings;
   return <>
-    <SiteHeader instagram={(settings ?? initialSettings).instagram} current="/work" />
+    <SiteHeader instagram={site.instagram} current="/work" />
     <main className="wrap interior">
       <h1>Work</h1>
       <Gallery projects={projects} categories={categories} />
     </main>
-    <SiteFooter />
+    <SiteFooter site={site} />
   </>;
 }
