@@ -1,6 +1,8 @@
 import { makeFunctionReference } from "convex/server";
 import { fetchQuery } from "convex/nextjs";
 import type { GenericId } from "convex/values";
+import { initialTeam, type TeamMember } from "./team-defaults";
+export type { TeamMember } from "./team-defaults";
 
 export const categories = ["Apartments", "Terraces", "Houses", "Renovation", "Commercial"];
 export type Project = {
@@ -13,10 +15,6 @@ export const initialSettings = {
   phone: "+64 21 232 0809", instagram: "",
 };
 export type Settings = typeof initialSettings;
-export type TeamMember = { id: string; name: string; role: string; bio: string };
-const initialTeam: TeamMember[] = [
-  { id: "oscar-park", name: "Oscar Park", role: "Founder, Principal Designer", bio: "" },
-];
 type Content = { projects: Project[]; settings: Settings | null };
 type Save = Omit<Project, "_id"> & { secret: string; id?: Project["_id"] };
 
@@ -24,9 +22,11 @@ export const contentApi = {
   read: makeFunctionReference<"query", { secret?: string }, Content>("content:read"),
   save: makeFunctionReference<"mutation", Save, { id: Project["_id"]; retiredImage?: string }>("content:saveProject"),
   remove: makeFunctionReference<"mutation", { secret: string; id: Project["_id"] }, { retiredImage?: string }>("content:removeProject"),
+  publish: makeFunctionReference<"mutation", { secret: string; id: Project["_id"]; published: boolean }, null>("content:setProjectPublished"),
   settings: makeFunctionReference<"mutation", { secret: string; details: Settings }, null>("content:saveSettings"),
   team: makeFunctionReference<"query", Record<string, never>, TeamMember[] | null>("content:readTeam"),
   saveTeam: makeFunctionReference<"mutation", { secret: string; members: TeamMember[] }, null>("content:saveTeam"),
+  changeMember: makeFunctionReference<"mutation", { secret: string; id: string; member?: TeamMember }, null>("content:changeTeamMember"),
   image: makeFunctionReference<"query", { key: string }, boolean>("content:publishedImage"),
   project: makeFunctionReference<"query", { id: string }, { project: Project; instagram?: string } | null>("content:publishedProject"),
 };

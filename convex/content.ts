@@ -1,5 +1,6 @@
 import { mutationGeneric as mutation, queryGeneric as query } from "convex/server";
 import { v } from "convex/values";
+import { initialTeam, type TeamMember } from "../lib/team-defaults";
 
 const project = {
   title: v.string(), category: v.string(), description: v.string(),
@@ -52,6 +53,14 @@ export const removeProject = mutation({
   },
 });
 
+export const setProjectPublished = mutation({
+  args: { secret: v.string(), id: v.id("projects"), published: v.boolean() },
+  handler: async (ctx, { secret, id, published }) => {
+    authorize(secret);
+    await ctx.db.patch(id, { published });
+  },
+});
+
 export const saveSettings = mutation({
   args: { secret: v.string(), details: settings },
   handler: async (ctx, { secret, details }) => {
@@ -78,6 +87,24 @@ export const saveTeam = mutation({
     const earlier = await ctx.db.query("team").first();
     if (earlier) await ctx.db.patch(earlier._id, { members });
     else await ctx.db.insert("team", { members });
+  },
+});
+
+export const changeTeamMember = mutation({
+  args: { secret: v.string(), id: v.string(), member: v.optional(teamMember) },
+  handler: async (ctx, { secret, id, member }) => {
+    authorize(secret);
+    const row = await ctx.db.query("team").first();
+    const members: TeamMember[] = row?.members ?? initialTeam;
+    const index = members.findIndex(item => item.id === id);
+    if (member && (member.id !== id || !member.name.trim() || member.name.length > 120 ||
+      member.role.length > 120 || member.bio.length > 3000 || (index === -1 && members.length >= 20))) {
+      throw new Error("Invalid team profile.");
+    }
+    const next = !member ? members.filter(item => item.id !== id)
+      : index === -1 ? [...members, member] : members.map(item => item.id === id ? member : item);
+    if (row) await ctx.db.patch(row._id, { members: next });
+    else await ctx.db.insert("team", { members: next });
   },
 });
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { Project } from "../lib/content";
+import { coverSource, isPlaceholderCover } from "../lib/project-cover";
 
 export default function Gallery({ projects, categories }: { projects: Project[]; categories: string[] }) {
   const [filter, setFilter] = useState("All");
@@ -14,8 +15,9 @@ export default function Gallery({ projects, categories }: { projects: Project[];
     {visible.length === 0 && <p className="quiet" role="status">{projects.length ? "No projects in this category yet." : "Project gallery coming soon."}</p>}
     <div className="projects">{visible.map(project => (
       <Link href={`/work/${project._id}`} className="tile" key={project._id}>
-        {project.imageKey && <img src={`/media/${project.imageKey}`} alt="" loading="lazy" />}
+        {project.imageKey && <img src={coverSource(project.imageKey)} alt="" loading="lazy" />}
         <span>{project.title}</span>
+        {isPlaceholderCover(project.imageKey) && <small>Placeholder project</small>}
       </Link>
     ))}</div>
   </>;

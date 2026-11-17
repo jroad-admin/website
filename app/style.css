@@ -39,7 +39,7 @@ h1{font:clamp(3.7rem,8vw,8rem)/.92 'Archivo Black',Arial Black,sans-serif;letter
 .about img{width:100%;display:block;aspect-ratio:5/4;object-fit:cover}
 h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-.05em;margin:.6rem 0 1.5rem}
 .about p,.contact p{line-height:1.6;white-space:pre-line}
-.contact{padding:clamp(2rem,8vw,7rem);background:#e5ecf5;margin-bottom:2rem}
+.contact{padding:clamp(2rem,8vw,7rem);margin-bottom:2rem}
 .contact-details{display:flex;flex-wrap:wrap;gap:0 5rem}
 .interior{min-height:65svh;padding-block:clamp(3rem,8vw,7rem) 4rem}
 .interior h1{margin:0 0 2rem;font:600 clamp(2.5rem,7vw,6rem)/1 'Instrument Sans',Arial,sans-serif;letter-spacing:-.06em;overflow-wrap:anywhere}
@@ -55,8 +55,9 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 .team-bio{white-space:pre-line;line-height:1.6}
 .contact-page{padding:1.4rem 0 2rem}
 .contact-page h1{font:600 1.3rem/1.4 'Instrument Sans',Arial,sans-serif;letter-spacing:.08em;text-align:center;text-transform:uppercase;margin:0 0 clamp(3rem,8vw,8rem)}
-.contact-panel{background:#e5ecfa;padding:clamp(2rem,6vw,6rem) clamp(1.15rem,4vw,3rem)}
-.contact-panel-inner{max-width:640px;margin-inline:auto}
+.contact-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:start;gap:clamp(2rem,7vw,7rem);padding-bottom:3rem}
+.contact-image{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:47% center}
+.contact-panel-inner{width:100%;max-width:640px;padding-top:clamp(.5rem,4vw,4rem)}
 .contact-panel-details{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem 2.5rem;line-height:1.75}
 .contact-panel-details p{margin:0;white-space:pre-line}
 .enquiry-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1.25rem;margin-top:3.5rem}
@@ -67,15 +68,11 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 .enquiry-form button{background:#252832;color:#fff;border:1px solid #252832;padding:.7rem 1rem}
 .profile-fields{display:grid;gap:.85rem;border:1px solid #747770;padding:1rem}
 @media(max-width:800px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:3rem}}
+@media(max-width:780px){.contact-panel{grid-template-columns:1fr}.contact-image{aspect-ratio:3/2}.contact-panel-inner{max-width:none;padding-top:0}}
 @media(max-width:480px){.enquiry-form{grid-template-columns:1fr}.contact-panel-details{gap:.65rem 1rem}}
 footer{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 2rem}
 footer a{text-decoration:none}
 .footer-logo{display:block;width:112px;height:auto;mix-blend-mode:multiply}
-dialog{border:0;padding:0;background:#faf9f7;color:inherit;width:min(680px,90vw);max-height:90vh}
-dialog::backdrop{background:#121212aa}
-dialog img{display:block;width:100%;max-height:54vh;object-fit:cover}
-dialog div{padding:1rem 1.75rem 1.75rem}
-dialog button{position:absolute;right:.8rem;top:.8rem;border:0;border-radius:50%;width:2.4rem;height:2.4rem;font-size:1.45rem;background:#fff}
 .portal{width:min(92%,920px);margin:2rem auto 5rem}
 .portal section{padding:1rem 0 2rem;border-top:1px solid #17171530}
 .portal form{display:grid;gap:.85rem;max-width:620px}
@@ -95,5 +92,50 @@ dialog button{position:absolute;right:.8rem;top:.8rem;border:0;border-radius:50%
 .actions button{background:#f9f9f6;border:1px solid #747770;padding:.5rem .8rem}
 .actions button[type=submit]{background:#25362d;color:#fff}
 .editor-row{display:flex;align-items:center;justify-content:space-between;gap:.55rem;border-bottom:1px solid #17171518;padding:.65rem 0}
+.portal-admin{width:min(92%,1200px);margin-top:2.5rem}
+.editor-header{display:flex;justify-content:space-between;gap:1rem;align-items:end;margin-bottom:2rem}
+.editor-header h1{font:600 clamp(2.4rem,6vw,4.6rem)/1 'Instrument Sans',Arial,sans-serif;letter-spacing:-.065em;margin:.85rem 0 0}
+.editor-header p,.editor-section-heading p,.editor-card-meta,.editor-member p{font-size:.88rem;color:#565752;margin:.45rem 0 0;overflow-wrap:anywhere}
+.editor-tabs{justify-content:flex-start;gap:.35rem;border-bottom:1px solid #25283230}
+.editor-tabs button{padding:.75rem 1rem;background:transparent;border:0;border-bottom:2px solid transparent;font-weight:600}
+.editor-tabs button[aria-pressed=true]{border-bottom-color:#25362d}
+.editor-feedback{line-height:1.5;font-size:.9rem;color:#304d3b;margin:.55rem 0}
+.editor-feedback:empty{display:none}
+.portal .editor-overview{border:0;padding-top:1.5rem}
+.editor-section-heading{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.editor-section-heading h2{font-size:1.8rem;margin:0}
+.editor-section-heading .actions{align-items:center}
+.editor-primary,.actions .editor-primary{background:#25362d;color:white;border:1px solid #25362d;padding:.65rem .95rem;white-space:nowrap}
+.project-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(125px,190px);gap:1rem;margin-bottom:1.2rem;max-width:640px}
+.project-toolbar label{font-size:.84rem}
+.editor-projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:1rem}
+.editor-project,.editor-member{background:#fcfbf8;border:1px solid #25283226;overflow:hidden}
+.project-thumbnail{width:100%;height:auto;display:block;aspect-ratio:16/10;object-fit:cover;background:#e9e7e2}
+.editor-empty-cover{display:grid;place-items:center;font-size:.85rem;color:#565752}
+.editor-card-content,.editor-member{padding:1rem}
+.editor-card-meta{display:flex;gap:.6rem;align-items:center;justify-content:space-between;margin:0}
+.status-live,.status-draft{border-radius:999px;padding:.2rem .5rem;font-size:.75rem}
+.status-live{background:#e4eee3;color:#263e2b}.status-draft{background:#eee8db;color:#4e412e}
+.editor-card-content h3,.editor-member h3{margin:.65rem 0 .3rem;font-size:1.15rem;overflow-wrap:anywhere}
+.editor-card-actions{margin-top:.75rem}
+.actions .delete-action{color:#8b3029}
+.editor-members{display:grid;gap:.7rem;max-width:800px}
+.editor-member{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.editor-member h3,.editor-member .actions{margin:0}
+.editor-empty{background:#fcfbf8;border:1px dashed #25283244;padding:1.4rem;color:#565752}
+.editor-dialog{border:1px solid #25283238;background:#fcfbf8;color:inherit;padding:0;width:min(680px,calc(100% - 2rem));max-height:90svh}
+.editor-dialog::backdrop{background:#161815a8}
+.editor-dialog-inner{padding:clamp(1rem,4vw,2rem)}
+.editor-dialog-heading{display:flex;justify-content:space-between;align-items:start;gap:1rem;margin-bottom:1rem}
+.editor-dialog-heading h2{font-size:clamp(1.65rem,4vw,2.4rem);margin:.35rem 0 0;overflow-wrap:anywhere}
+.editor-dialog-heading button{flex:none;border:1px solid #25283238;background:transparent;width:2.2rem;height:2.2rem;font-size:1.35rem}
+.editor-form-actions{justify-content:flex-end;align-items:center;margin-top:.6rem}
+.actions .secondary-action{background:#fcfbf8;color:#25362d}
+.actions .editor-danger{background:#8b3029;border-color:#8b3029;color:#fff}
+.editor-cover{margin:.5rem 0;font-size:.85rem}
+.editor-cover img{display:block;width:100%;max-height:44svh;object-fit:contain;background:#eeebe5}
+.editor-cover figcaption{margin-top:.4rem}
+.editor-bio{white-space:pre-line;line-height:1.6;overflow-wrap:anywhere}
+@media(max-width:600px){.editor-header,.editor-section-heading,.editor-member{align-items:flex-start;flex-direction:column}.editor-header{gap:.25rem}.editor-tabs button{padding-inline:.65rem}}
 @media(max-width:680px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}.about{grid-template-columns:1fr}.hero{min-height:70svh}.contact{padding:2rem}.masthead{min-height:60px}}
 @media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}}

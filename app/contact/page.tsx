@@ -14,6 +14,7 @@ export default async function Contact() {
     <main className="wrap contact-page">
       <h1>Contact</h1>
       <div className="contact-panel">
+        <img className="contact-image" src="/assets/contact-workshop.webp" alt="Hands working with timber at a workshop bench" width="1200" height="800" />
         <div className="contact-panel-inner">
           <div className="contact-panel-details">
             {site.address && <p>{site.address}</p>}

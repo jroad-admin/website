@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { readProject } from "../../../lib/content";
+import { coverSource, isPlaceholderCover } from "../../../lib/project-cover";
 import { SiteFooter, SiteHeader } from "../../site-chrome";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +28,8 @@ export default async function ProjectPage({ params }: Props) {
       <Link href="/work">← All work</Link>
       <p className="eyebrow project-category">{project.category}</p>
       <h1>{project.title}</h1>
-      {project.imageKey && <img className="project-cover" src={`/media/${project.imageKey}`} alt={project.title} />}
+      {isPlaceholderCover(project.imageKey) && <p className="quiet">Placeholder project</p>}
+      {project.imageKey && <img className="project-cover" src={coverSource(project.imageKey)} alt={project.title} />}
       <p className="studio-copy">{project.description}</p>
     </main>
     <SiteFooter />
