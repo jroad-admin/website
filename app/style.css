@@ -101,6 +101,8 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 .editor-tabs button[aria-pressed=true]{border-bottom-color:#25362d}
 .editor-feedback{line-height:1.5;font-size:.9rem;color:#304d3b;margin:.55rem 0}
 .editor-feedback:empty{display:none}
+.editor-saving-indicator{display:inline-block;width:1em;height:1em;margin-inline-end:.5em;border:2px solid #304d3b45;border-top-color:currentColor;border-radius:50%;vertical-align:-.15em;animation:editor-spin .7s linear infinite}
+@keyframes editor-spin{to{transform:rotate(1turn)}}
 .portal .editor-overview{border:0;padding-top:1.5rem}
 .editor-section-heading{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.2rem}
 .editor-section-heading h2{font-size:1.8rem;margin:0}
@@ -150,4 +152,4 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
   .editor-form-actions{justify-content:flex-start}
 }
 @media(max-width:360px){.project-toolbar{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}.editor-saving-indicator{animation:none}}
