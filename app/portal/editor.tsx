@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useTransition, type FormEvent } from "react";
 import type { Project, Settings, TeamMember } from "../../lib/content";
 import { coverSource, isPlaceholderCover } from "../../lib/project-cover";
@@ -25,8 +25,9 @@ export default function Editor({ projects, settings, categories, enhancementEnab
   projects: Project[]; settings: Settings; categories: string[]; enhancementEnabled: boolean; members: TeamMember[];
 }) {
   const router = useRouter();
+  const section = useSearchParams().get("section");
+  const tab = section === "about" || section === "settings" ? section : "projects";
   const [refreshing, refresh] = useTransition();
-  const [tab, setTab] = useState<"projects" | "about" | "settings">("projects");
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [panel, setPanel] = useState<Panel>();
@@ -73,7 +74,10 @@ export default function Editor({ projects, settings, categories, enhancementEnab
     (filter === "all" || project.published === (filter === "published")) &&
     `${project.title} ${project.category}`.toLowerCase().includes(search.trim().toLowerCase())
   );
-  const notice = <p className="editor-feedback" role="status" aria-live="polite">{message || (saving ? "Saving…" : "")}</p>;
+  const updating = saving || refreshing;
+  const notice = <p className="editor-feedback" role="status" aria-live="polite">
+    {updating ? <><span className="editor-saving-indicator" aria-hidden="true" />{saving ? "Saving…" : "Refreshing…"}</> : message}
+  </p>;
   const activeProject = panel?.kind === "project-view" ? panel.project : undefined;
   const activeMember = panel?.kind === "member-view" ? panel.member : undefined;
 
@@ -81,7 +85,10 @@ export default function Editor({ projects, settings, categories, enhancementEnab
     <nav className="editor-tabs" aria-label="Editor sections">
       {([["projects", "Projects"], ["about", "About"], ["settings", "Site details"]] as const).map(([value, label]) =>
         <button key={value} type="button" aria-pressed={tab === value} disabled={locked} onClick={() => {
-          setTab(value);
+          const url = new URL(window.location.href);
+          if (value === "projects") url.searchParams.delete("section");
+          else url.searchParams.set("section", value);
+          window.history.replaceState(null, "", url);
           setMessage("");
         }}>{label}</button>
       )}
