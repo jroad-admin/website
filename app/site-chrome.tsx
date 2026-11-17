@@ -23,11 +23,17 @@ export function SiteHeader({ instagram, current }: { instagram?: string; current
   </nav></header>;
 }
 
-export function SiteFooter({ children }: { children?: ReactNode }) {
+export function SiteWhale({ compact = false }: { compact?: boolean }) {
+  return <Link href="/" className={compact ? "footer-whale-compact" : undefined}>
+    <img className="footer-logo" src="/assets/jroad-whale.jpg" width={compact ? 52 : 112} height={compact ? 36 : 78} alt="JROAD home" />
+  </Link>;
+}
+
+export function SiteFooter({ children, showLogo = true }: { children?: ReactNode; showLogo?: boolean }) {
   return <footer className="wrap">
     {children}
     <div className="footer-links">
-      <Link href="/"><img className="footer-logo" src="/assets/jroad-whale.jpg" width="112" height="78" alt="JROAD home" /></Link>
+      {showLogo && <SiteWhale />}
       <Link href="/portal">Editor portal</Link>
     </div>
   </footer>;
