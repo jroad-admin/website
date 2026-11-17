@@ -30,9 +30,8 @@ h1{font:clamp(3.7rem,8vw,8rem)/.92 'Archivo Black',Arial Black,sans-serif;letter
 .down::before{top:.15rem}.down::after{top:.82rem}
 .work{padding-block:2rem 5rem}
 .home-work{padding-top:1.5rem}
-.home-work .filters{margin-bottom:1.7rem}
 .home-work .tile small{font-size:.75rem;color:#565752}
-.filters{gap:.55rem clamp(.65rem,2.8vw,3rem)}
+.filters{gap:.55rem clamp(.65rem,2.8vw,3rem);margin-bottom:1.7rem}
 .filters button{background:none;border:0;border-bottom:1px solid transparent;padding:.6rem .15rem}
 .filters button[aria-pressed=true]{border-color:currentColor}
 .quiet{color:#565752;font-size:.82rem;margin:1.15rem 0}
