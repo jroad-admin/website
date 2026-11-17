@@ -1,5 +1,16 @@
 import Link from "next/link";
 
+export function InstagramLink({ href }: { href: string }) {
+  return <a href={href} className="instagram-link" aria-label="J Road on Instagram"
+    target="_blank" rel="noopener noreferrer">
+    <svg aria-hidden="true" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.4" cy="6.8" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  </a>;
+}
+
 export function SiteHeader({ instagram, current }: { instagram?: string; current: string }) {
   return <header className="masthead"><nav aria-label="Main navigation">
     {[
@@ -7,7 +18,7 @@ export function SiteHeader({ instagram, current }: { instagram?: string; current
     ].map(([href, label]) => (
       <Link key={href} href={href} aria-current={current === href ? "page" : undefined}>{label}</Link>
     ))}
-    {instagram && <a href={instagram}>Instagram</a>}
+    {instagram && <InstagramLink href={instagram} />}
   </nav></header>;
 }
 

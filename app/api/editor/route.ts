@@ -1,10 +1,17 @@
 import { fetchMutation } from "convex/nextjs";
 import { categories, contentApi, convexOptions, type Project } from "../../../lib/content";
+import { z } from "zod";
 import { editorIdentity, editorSecret } from "../../../lib/editor-auth";
 import { discardImage, uploadImage } from "../../../lib/images";
 import { enhanceImage } from "../../../lib/enhance-image";
 
 export const maxDuration = 45;
+const teamProfiles = z.array(z.object({
+  id: z.string().min(1).max(100),
+  name: z.string().trim().min(1).max(120),
+  role: z.string().trim().max(120),
+  bio: z.string().trim().max(3000),
+})).max(20);
 
 export async function POST(request: Request) {
   if (!(await editorIdentity(request.headers))) return Response.json({ error: "Editor access required." }, { status: 403 });
@@ -36,6 +43,10 @@ export async function POST(request: Request) {
     if (text("action") === "delete" && id) {
       const result = await fetchMutation(contentApi.remove, { secret, id }, options);
       await discardImage(result.retiredImage);
+    } else if (text("action") === "team") {
+      const result = teamProfiles.safeParse(JSON.parse(text("members")));
+      if (!result.success) return Response.json({ error: "Enter a name for each profile and check the text lengths." }, { status: 400 });
+      await fetchMutation(contentApi.saveTeam, { secret, members: result.data }, options);
     } else if (text("action") === "settings") {
       const details = { about: text("about"), address: text("address"), email: text("email"), phone: text("phone"), instagram: text("instagram") };
       if (Object.values(details).some(value => value.length > 4000) ||

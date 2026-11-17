@@ -15,6 +15,10 @@ nav a,.filters button,.eyebrow,footer,.hero-contact{font-size:.78rem;font-weight
 nav a{text-decoration:none}
 nav a:hover,footer a:hover{text-decoration:underline}
 nav a[aria-current=page]{text-decoration:underline}
+.instagram-link{display:inline-grid;place-items:center;width:2rem;height:2rem;color:inherit}
+.instagram-link svg{display:block}
+.instagram-link:hover{opacity:.65}
+.screen-reader-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .hero{min-height:calc(90svh - 76px);display:flex;align-items:flex-end;padding-bottom:clamp(3rem,11vh,8rem)}
 h1{font:clamp(3.7rem,8vw,8rem)/.92 'Archivo Black',Arial Black,sans-serif;letter-spacing:-.085em;margin:0}
 .tagline{font-size:clamp(.75rem,1.55vw,1.4rem);letter-spacing:.29em;text-transform:uppercase;font-weight:700;margin:1.45rem 0 3rem}
@@ -42,6 +46,28 @@ h2{font-size:clamp(2rem,4vw,4rem);font-weight:600;line-height:1;letter-spacing:-
 .studio-copy{max-width:65ch;line-height:1.65;white-space:pre-line}
 .project-category{margin:2.5rem 0 .65rem}
 .project-cover{display:block;width:100%;max-height:75vh;object-fit:contain;object-position:left center}
+.team-page{min-height:65svh;padding-block:clamp(4rem,10vw,8rem) 5rem}
+.team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.4rem,4vw,4rem)}
+.team-profile h2,.team-role{font-family:Georgia,serif;text-transform:uppercase;letter-spacing:.06em}
+.team-profile h2{font-size:1.2rem;font-weight:400;margin:0 0 .9rem}
+.team-role{font-size:.78rem;line-height:1.4;margin:0 0 1.3rem}
+.team-portrait{display:block;width:min(100%,194px);height:auto;margin-block:1.5rem;mix-blend-mode:multiply}
+.team-bio{white-space:pre-line;line-height:1.6}
+.contact-page{padding:1.4rem 0 2rem}
+.contact-page h1{font:600 1.3rem/1.4 'Instrument Sans',Arial,sans-serif;letter-spacing:.08em;text-align:center;text-transform:uppercase;margin:0 0 clamp(3rem,8vw,8rem)}
+.contact-panel{background:#e5ecfa;padding:clamp(2rem,6vw,6rem) clamp(1.15rem,4vw,3rem)}
+.contact-panel-inner{max-width:640px;margin-inline:auto}
+.contact-panel-details{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem 2.5rem;line-height:1.75}
+.contact-panel-details p{margin:0;white-space:pre-line}
+.enquiry-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1.25rem;margin-top:3.5rem}
+.enquiry-form h2,.enquiry-wide{grid-column:1/-1}
+.enquiry-form h2{text-align:center;font-size:1.25rem;letter-spacing:.02em;margin:.25rem 0 1rem}
+.enquiry-form input,.enquiry-form textarea{display:block;width:100%;margin-top:.5rem;padding:.62rem;border:1px solid #444957;background:transparent;border-radius:0}
+.enquiry-form textarea{resize:vertical}
+.enquiry-form button{background:#252832;color:#fff;border:1px solid #252832;padding:.7rem 1rem}
+.profile-fields{display:grid;gap:.85rem;border:1px solid #747770;padding:1rem}
+@media(max-width:800px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:3rem}}
+@media(max-width:480px){.enquiry-form{grid-template-columns:1fr}.contact-panel-details{gap:.65rem 1rem}}
 footer{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 2rem}
 footer a{text-decoration:none}
 .footer-logo{display:block;width:112px;height:auto;mix-blend-mode:multiply}

@@ -8,6 +8,7 @@ const project = {
 const settings = v.object({
   about: v.string(), address: v.string(), email: v.string(), phone: v.string(), instagram: v.string(),
 });
+const teamMember = v.object({ id: v.string(), name: v.string(), role: v.string(), bio: v.string() });
 
 function authorize(secret: string) {
   const expected = process.env.WEBSITE_EDITOR_SECRET;
@@ -58,6 +59,25 @@ export const saveSettings = mutation({
     const previous = await ctx.db.query("settings").first();
     if (previous) await ctx.db.patch(previous._id, { details });
     else await ctx.db.insert("settings", { details });
+  },
+});
+
+export const readTeam = query({
+  args: {},
+  handler: async ctx => (await ctx.db.query("team").first())?.members ?? null,
+});
+
+export const saveTeam = mutation({
+  args: { secret: v.string(), members: v.array(teamMember) },
+  handler: async (ctx, { secret, members }) => {
+    authorize(secret);
+    if (members.length > 20 || new Set(members.map(member => member.id)).size !== members.length ||
+      members.some(member => !member.name.trim() || member.name.length > 120 || member.role.length > 120 || member.bio.length > 3000)) {
+      throw new Error("Invalid team profiles.");
+    }
+    const earlier = await ctx.db.query("team").first();
+    if (earlier) await ctx.db.patch(earlier._id, { members });
+    else await ctx.db.insert("team", { members });
   },
 });
 

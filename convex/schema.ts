@@ -11,4 +11,7 @@ export default defineSchema({
       about: v.string(), address: v.string(), email: v.string(), phone: v.string(), instagram: v.string(),
     }),
   }),
+  team: defineTable({
+    members: v.array(v.object({ id: v.string(), name: v.string(), role: v.string(), bio: v.string() })),
+  }),
 });

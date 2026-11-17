@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent } from "react";
-import type { Project, Settings } from "../../lib/content";
+import type { Project, Settings, TeamMember } from "../../lib/content";
 
 function useImagePreview(file?: File) {
   const [url, setUrl] = useState<string>();
@@ -18,8 +18,8 @@ function useImagePreview(file?: File) {
   return url;
 }
 
-export default function Editor({ projects, settings, categories, enhancementEnabled }: {
-  projects: Project[]; settings: Settings; categories: string[]; enhancementEnabled: boolean;
+export default function Editor({ projects, settings, categories, enhancementEnabled, members }: {
+  projects: Project[]; settings: Settings; categories: string[]; enhancementEnabled: boolean; members: TeamMember[];
 }) {
   const router = useRouter();
   const [editing, setEditing] = useState<Project>();
@@ -30,6 +30,7 @@ export default function Editor({ projects, settings, categories, enhancementEnab
   const [original, setOriginal] = useState<File>();
   const [enhanced, setEnhanced] = useState<File>();
   const [useEnhanced, setUseEnhanced] = useState(false);
+  const [profiles, setProfiles] = useState(members);
   const originalUrl = useImagePreview(original);
   const enhancedUrl = useImagePreview(enhanced);
   const locked = busy || processing;
@@ -100,6 +101,19 @@ export default function Editor({ projects, settings, categories, enhancementEnab
     setRevision(value => value + 1);
   }
 
+  function editProfile(id: string, field: "name" | "role" | "bio", value: string) {
+    setProfiles(items => items.map(item => item.id === id ? { ...item, [field]: value } : item));
+  }
+
+  function submitProfiles(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (locked) return;
+    const data = new FormData();
+    data.set("action", "team");
+    data.set("members", JSON.stringify(profiles));
+    void save(data);
+  }
+
   function remove(project: Project) {
     if (!confirm(`Delete “${project.title}” and its cover image?`)) return;
     const data = new FormData();
@@ -149,12 +163,10 @@ export default function Editor({ projects, settings, categories, enhancementEnab
     <form onSubmit={event => submit(event)}>
       <input type="hidden" name="action" value="settings" />
       <section id="about-page" aria-labelledby="about-page-heading">
-        <h2 id="about-page-heading">About page</h2>
-        <p className="quiet">This text also appears in the homepage’s About section.</p>
+        <h2 id="about-page-heading">Homepage studio introduction</h2>
         <label>About the studio<textarea name="about" rows={7} maxLength={4000} defaultValue={settings.about} /></label>
         <div className="actions settings-actions">
           <button type="submit" disabled={locked}>Save page content</button>
-          <a href="/about" target="_blank" rel="noopener noreferrer">View About page ↗</a>
         </div>
       </section>
       <section aria-labelledby="contact-details-heading">
@@ -168,5 +180,24 @@ export default function Editor({ projects, settings, categories, enhancementEnab
         <div className="actions settings-actions"><button type="submit" disabled={locked}>Save page content</button></div>
       </section>
     </form>
+    <section aria-labelledby="team-heading">
+      <h2 id="team-heading">About page team profiles</h2>
+      <form onSubmit={submitProfiles}>
+        {profiles.map((member, index) => <fieldset className="profile-fields" key={member.id}>
+          <legend>{member.name || `Member ${index + 1}`}</legend>
+          <label>Name<input required maxLength={120} value={member.name} onChange={event => editProfile(member.id, "name", event.target.value)} /></label>
+          <label>Role<input maxLength={120} value={member.role} onChange={event => editProfile(member.id, "role", event.target.value)} /></label>
+          <label>About me<textarea rows={4} maxLength={3000} value={member.bio} onChange={event => editProfile(member.id, "bio", event.target.value)} /></label>
+          <div className="actions"><button type="button" disabled={locked}
+            onClick={() => setProfiles(items => items.filter(item => item.id !== member.id))}>Remove profile</button></div>
+        </fieldset>)}
+        <div className="actions">
+          <button type="button" disabled={locked || profiles.length >= 20}
+            onClick={() => setProfiles(items => [...items, { id: crypto.randomUUID(), name: "", role: "", bio: "" }])}>Add team member</button>
+          <button type="submit" disabled={locked}>Save team profiles</button>
+          <a href="/about" target="_blank" rel="noopener noreferrer">View About page ↗</a>
+        </div>
+      </form>
+    </section>
   </>;
 }
